@@ -8,6 +8,8 @@
 
 Runs `pi --mode rpc` as a subprocess and drives it over its JSONL protocol — no terminal required.
 
+**[Русская версия](README.ru.md)** · English
+
 </div>
 
 ---
@@ -116,3 +118,7 @@ media/                  # icons and logos
 ## 📄 License
 
 [MIT](LICENSE)
+
+## 🤖 Provenance
+
+All code in this repository was generated with **[pi](https://github.com/earendil-works/pi) 1.1.0** using the **GLM-5.3** model.
