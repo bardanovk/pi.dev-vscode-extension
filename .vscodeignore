@@ -1,0 +1,7 @@
+.vscode/**
+src/**
+node_modules/**
+out/**/*.js.map
+esbuild.js
+tsconfig.json
+**/.DS_Store

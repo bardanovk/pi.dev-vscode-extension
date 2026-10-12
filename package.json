@@ -1,0 +1,112 @@
+{
+  "name": "pi-vscode",
+  "displayName": "Pi Coding Agent",
+  "description": "pi coding agent embedded in a VS Code chat panel (RPC mode)",
+  "version": "0.1.0",
+  "publisher": "pi-vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "main": "./out/extension.js",
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onView:piAgent.chat",
+    "onCommand:piAgent.focus"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pi-agent",
+          "title": "Pi Agent",
+          "icon": "media/pi.svg"
+        }
+      ]
+    },
+    "views": {
+      "pi-agent": [
+        {
+          "type": "webview",
+          "id": "piAgent.chat",
+          "name": "Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "piAgent.focus",
+        "title": "Open Pi Chat",
+        "category": "Pi"
+      },
+      {
+        "command": "piAgent.newSession",
+        "title": "New Session",
+        "category": "Pi",
+        "icon": "$(add)"
+      },
+      {
+        "command": "piAgent.stop",
+        "title": "Stop current run",
+        "category": "Pi",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "piAgent.selectModel",
+        "title": "Select Model",
+        "category": "Pi",
+        "icon": "$(symbol-method)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "piAgent.newSession",
+          "group": "navigation",
+          "when": "view == piAgent.chat"
+        },
+        {
+          "command": "piAgent.selectModel",
+          "group": "navigation",
+          "when": "view == piAgent.chat"
+        },
+        {
+          "command": "piAgent.stop",
+          "group": "navigation",
+          "when": "view == piAgent.chat"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Pi",
+      "properties": {
+        "pi.executablePath": {
+          "type": "string",
+          "default": "pi",
+          "description": "Path to the pi CLI executable (falls back to ~/.pi/agent/bin/pi when not found in PATH)."
+        },
+        "pi.persistSessions": {
+          "type": "boolean",
+          "default": false,
+          "description": "Persist sessions to disk (start pi without --no-session)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "node esbuild.js --production"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.21.5",
+    "typescript": "^5.4.5"
+  }
+}
